@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Source+Sans+Pro&display=swap'); 
+
+:root {
+  --regular-font-size: 16px;
+  --medium-font-size: 20px;
+  --large-font-size: 24px;
+  --primary-font-family: 'Source Sans Pro', sans-serif;
+  --contacts-list-item-font: 'Poppins', sans-serif;
+  --contact-name-font: 'Inter', sans-serif;
+  --chat-font-family: 'Source Sans Pro', sans-serif;
+  --text-color: #1B262C;
+  --primary-color: #0F4C75;
+  --secondary-color: #3282B8;
+  --bg-color: #BBE1FA;
+  --white-color: #FFFFFF;
+  --black-color: #000000;
+  --border-color: #1B262C;
+}
+

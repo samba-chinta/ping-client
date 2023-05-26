@@ -1,0 +1,10 @@
+.button-wrapper {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-size: var(--primary-font-family);
+    box-sizing: border-box;
+}

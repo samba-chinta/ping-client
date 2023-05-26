@@ -1,0 +1,9 @@
+.input-wrapper {
+    outline: none;
+    border: solid 1px var(----border-color);
+    padding: 5px;
+}
+
+.input-wrapper::placeholder {
+    color: var(--text-color);
+}

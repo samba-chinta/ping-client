@@ -1,0 +1,29 @@
+.link-wrapper {
+    text-decoration: none;
+    font-family: var(--primary-font-family);
+    font-size: var(--regular-font-size);
+    padding: 10px;
+    margin: 5px;
+}
+
+.primary-route {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: solid 2px var(--primary-color);
+}
+
+.secondary-route {
+    background-color: var(--secondary-color);
+    color: var(--black-color);
+    border: solid 2px var(--secondary-color);
+}
+
+.primary-route:hover {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+}
+
+.secondary-route:hover {
+    background-color: var(--white-color);
+    color: var(--secondary-color);
+}
