@@ -1,9 +1,10 @@
 .link-wrapper {
+    position: relative;
     text-decoration: none;
     font-family: var(--primary-font-family);
     font-size: var(--regular-font-size);
-    padding: 10px;
-    margin: 5px;
+    box-sizing: border-box;
+    padding: 5px;
 }
 
 .primary-route {
