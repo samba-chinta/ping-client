@@ -5,6 +5,15 @@
     text-align: center;
     background-color: var(--primary-color);
     color: var(--white-color);
-    font-size: var(--primary-font-family);
+    font-size: var(--regular-font-size);
     box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+    border: solid 1px var(--primary-color);
+    font-family: var(--primary-font-color);
+}
+
+.button-wrapper:hover {
+    background-color: var(--white-color);
+    color: var(--primary-color);
 }

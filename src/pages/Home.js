@@ -28,7 +28,7 @@ const Home = (props) => {
                     <Link to="/login" className={styles["route-link"]}>
                         Login
                     </Link>
-                    <Link to="/register" className={styles["route-link"]}>
+                    <Link to="/auth/register" className={styles["route-link"]}>
                         Register
                     </Link>
                     </div>

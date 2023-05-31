@@ -6,7 +6,7 @@ const Input = (props) => {
     const input_type = props.inputType;
     const placeholder = props.inputPlaceholder;
     const classes = `${styles["input-wrapper"]} ${props.className}`;
-    const input_ref = props.ref;
+    const input_ref = props.inputRef;
 
     return (
         <input

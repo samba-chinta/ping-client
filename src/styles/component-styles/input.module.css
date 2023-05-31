@@ -1,7 +1,11 @@
 .input-wrapper {
+    width: 100%;
     outline: none;
-    border: solid 1px var(----border-color);
-    padding: 5px;
+    border: solid 1px var(--border-color);
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: var(--primary-font-family);
+    border-radius: 2px;
 }
 
 .input-wrapper::placeholder {
