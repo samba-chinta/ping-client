@@ -25,7 +25,7 @@ const Home = (props) => {
                         Ping anyone in the world from your comfort zone!!
                     </h2>
                     <div className={styles['routes-wrapper']}>
-                    <Link to="/login" className={styles["route-link"]}>
+                    <Link to="/auth/login" className={styles["route-link"]}>
                         Login
                     </Link>
                     <Link to="/auth/register" className={styles["route-link"]}>

@@ -18,3 +18,20 @@
     color: var(--secondary-color);
     font-size: 12px;
 }
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+input[type='checkbox']:checked + span{
+    color: var(--secondary-color);
+}
+
+@media screen and (max-width:450px) {
+    .form-wrapper {
+        width: 90vw;
+    }
+}
