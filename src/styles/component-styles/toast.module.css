@@ -1,0 +1,23 @@
+.toast-wrapper {
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+    width: 200px;
+    height: fit-content;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: var(--white-color);
+}
+
+.success {
+    background-color: var(--green-color);
+}
+
+.failure {
+    background-color: var(--red-color);
+}
+
+.information {
+    background-color: var(--primary-color);
+}
