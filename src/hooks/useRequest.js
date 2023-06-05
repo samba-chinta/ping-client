@@ -1,69 +1,77 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const useRequest = () => {
-    const [error, setError] = useState("");
-    const [response, setResponse] = useState("");
-    const [isLoading, setIsLoading] = useState("");
+const useApi = () => {
+    const [response, setResponse] = useState('');
+    const [error, setError] = useState('');
 
-    const getRequestHandler = async (payload) => {
-        let url = payload.url;
+    useEffect(() => {
+        setTimeout(() => {
+            setResponse('');
+        }, 5000)
+    }, [response]);
 
-        const queryParamKeys = payload.queryParamKeys;
-        // expected to be in same order as queryParamKeys
-        const queryParamValues = payload.queryParamValues;
-
-        // constructing query string
-        for (let i = 0; i < queryParamKeys.length; i++) {
-            if (i) {
-                url += `&${queryParamKeys[0]}=${queryParamValues[1]}`;
-            } else {
-                url += `?${queryParamKeys[0]}=${queryParamValues[1]}`;
-            }
+    useEffect(() => {
+        setTimeout(() => {
+            setError('');
+        }, 5000)
+    }, [error]);
+    
+    const getDataFromApiHandler = async (payload) => {
+        const { url } = payload;
+        try {
+            const responseData = await fetch(url);
+            return responseData.json();
+        } catch (err) {
+            return err;
         }
+    }
 
-        // sending the request
-        setIsLoading(true);
-        await fetch(url, {
-            method: "GET",
-        })
-            .then((res) => {
-                setResponse(res);
+    const postDataToApiHandler = async (payload) => {
+        const { url, data } = payload;
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                // mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
             })
-            .catch((err) => {
-                setError(err);
-            });
-        setIsLoading(false);
-    };
+            if (!response.ok) {
+                setError(await response.json());
+            } else {
+                console.log("Hello")
+                setResponse(await response.json());
+            }
+        } catch (err) {
+            setError(err);
+        }
+    }
 
-    const postRequestHandler = async (payload) => {
-        const url = payload.url;
-        const reqBody = payload.body;
-        const token = payload.token;
-
-        setIsLoading(true);
-        await fetch(url, {
-            method: "POST",
-            headers: {
-                "x-access-token": token,
-            },
-            body: JSON.stringify(reqBody),
-        })
-            .then((res) => {
-                setResponse(res);
+    const deleteDataFromApiHandler = async (payload) => {
+        const { url, data } = payload;
+        try {
+            const responseData = await fetch(url, {
+                method: "DELETE",
+                // mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
             })
-            .catch((err) => {
-                setError(err);
-            });
-        setIsLoading(false);
-    };
+            return responseData.json();
+        } catch (err) {
+            return err;
+        }
+    }
 
     return {
         response,
         error,
-        isLoading,
-        getRequestHandler,
-        postRequestHandler,
-    };
-};
+        getDataFromApiHandler,
+        postDataToApiHandler,
+        deleteDataFromApiHandler
+    }
+}
 
-export default useRequest;
+export default useApi;

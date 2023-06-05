@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 
 import styles from "../../styles/component-styles/form.module.css";
@@ -9,41 +9,68 @@ import Toast from "../UI/Toast";
 import useRequest from "../../hooks/useRequest";
 
 const Register = (props) => {
+    const navigate = useNavigate();
     const emailRef = useRef("");
+    const userNameRef = useRef("");
     const passwordRef = useRef("");
     const confirmPasswordRef = useRef("");
-    const [isAllFilled, setIsAllField] = useState(true);
 
-    const { response, error, isLoading, postRequestHandler } = useRequest();
+    const [isLoading, setIsLoading] = useState(false);
+    const [isAllFilled, setIsAllFilled] = useState(true);
+    const [validationAlert, setValidationAlert] = useState("");
+
+    const { response, error, postDataToApiHandler } = useRequest();
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsAllFilled(true);
+        }, 5000);
+    }, [isAllFilled]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setValidationAlert("");
+        }, 5000);
+    }, [validationAlert]);
 
     const formSubmitHandler = async (e) => {
         e.preventDefault();
 
         // retrieving the values
         const email = emailRef.current.value;
+        const username = userNameRef.current.value;
         const password = passwordRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
 
-        if (!email || !password || !confirmPassword) {
-            // raise a toast with error
-            setIsAllField(false);
+        if (!email || !password || !confirmPassword || !username) {
+            setIsAllFilled(false);
+        } else if (password !== confirmPassword) {
+            setValidationAlert("Both password must be the same");
         } else {
             // send a post request to create account
-            await postRequestHandler({
+            setIsLoading(true);
+            await postDataToApiHandler({
                 url: "http://localhost:5000/auth/register",
-                token: "", // no token for now
-                body: {
+                data: {
+                    username,
                     email,
                     password,
+                    token: "",
                 },
-            })
+            });
+            setIsLoading(false);
         }
 
         // set to null
         emailRef.current.value = "";
+        userNameRef.current.value = "";
         passwordRef.current.value = "";
-        confirmPassword.current.value = "";
+        confirmPasswordRef.current.value = "";
     };
+
+    if (response) {
+        navigate("/auth/login");
+    }
 
     return (
         <div className={styles["form-wrapper"]}>
@@ -53,6 +80,11 @@ const Register = (props) => {
                     inputType="email"
                     inputPlaceholder="Email Address*"
                     inputRef={emailRef}
+                />
+                <Input
+                    inputType="text"
+                    inputPlaceholder="Username*"
+                    inputRef={userNameRef}
                 />
                 <Input
                     inputType="password"
@@ -80,7 +112,7 @@ const Register = (props) => {
             {response &&
                 createPortal(
                     <Toast
-                        toastMessage="Successfully Registered"
+                        toastMessage={`${response?.message}`}
                         className="success"
                     />,
                     document.getElementById("toast")
@@ -88,7 +120,7 @@ const Register = (props) => {
             {error &&
                 createPortal(
                     <Toast
-                        toastMessage="Registration Failed, Try Again!"
+                        toastMessage={`${error?.message}`}
                         className="failure"
                     />,
                     document.getElementById("toast")
@@ -96,6 +128,14 @@ const Register = (props) => {
             {isLoading &&
                 createPortal(
                     <Toast toastMessage="Loading" className="info" />,
+                    document.getElementById("toast")
+                )}
+            {validationAlert &&
+                createPortal(
+                    <Toast
+                        toastMessage={validationAlert}
+                        className="failure"
+                    />,
                     document.getElementById("toast")
                 )}
         </div>
