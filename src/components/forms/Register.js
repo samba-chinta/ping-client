@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 
 import styles from "../../styles/component-styles/form.module.css";
@@ -9,7 +9,6 @@ import Toast from "../UI/Toast";
 import useRequest from "../../hooks/useRequest";
 
 const Register = (props) => {
-    const navigate = useNavigate();
     const emailRef = useRef("");
     const userNameRef = useRef("");
     const passwordRef = useRef("");
@@ -68,10 +67,6 @@ const Register = (props) => {
         confirmPasswordRef.current.value = "";
     };
 
-    if (response) {
-        navigate("/auth/login");
-    }
-
     return (
         <div className={styles["form-wrapper"]}>
             <form onSubmit={formSubmitHandler} className={styles["form"]}>
@@ -110,13 +105,7 @@ const Register = (props) => {
                     document.getElementById("toast")
                 )}
             {response &&
-                createPortal(
-                    <Toast
-                        toastMessage={`${response?.message}`}
-                        className="success"
-                    />,
-                    document.getElementById("toast")
-                )}
+                <Navigate to="/auth/login" replace={true} />}
             {error &&
                 createPortal(
                     <Toast

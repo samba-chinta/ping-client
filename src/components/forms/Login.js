@@ -1,35 +1,74 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { createPortal } from "react-dom";
+import { useDispatch } from "react-redux";
 
 import styles from "../../styles/component-styles/form.module.css";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
+import useApi from "../../hooks/useRequest";
+import Toast from "../UI/Toast";
+import { authActions } from "../../redux/auth-slice";
 
 const Login = (props) => {
-    const emailRef = useRef("");
-    const passwordRef = useRef("");
+    const dispatch = useDispatch();
 
-    const formSubmitHandler = (e) => {
+    const userNameRef = useRef("");
+    const passwordRef = useRef("");
+    const { response, error, postDataToApiHandler } = useApi();
+    const [validationAlert, setValidationAlert] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setValidationAlert("");
+        }, 5000);
+    }, [validationAlert]);
+
+    const formSubmitHandler = async (e) => {
         e.preventDefault();
-        console.log(emailRef.current.value);
-        console.log(passwordRef.current.value);
+
+        const username = userNameRef.current.value;
+        const password = passwordRef.current.value;
+
+        if (!username || !password) {
+            setValidationAlert("Please fill all the fields");
+        } else {
+            setIsLoading(true);
+            await postDataToApiHandler({
+                url: "http://localhost:5000/auth/login",
+                data: {
+                    username,
+                    password,
+                },
+            });
+            setIsLoading(false);
+        }
     };
+
+    if (response) {
+        dispatch(
+            authActions.login({
+                token: response.authToken
+            })
+        )
+    }
 
     return (
         <div className={styles["form-wrapper"]}>
             <form onSubmit={formSubmitHandler} className={styles["form"]}>
                 <h2>Login into your Account</h2>
                 <Input
-                    inputType="email"
-                    inputPlaceholder="Email Address"
-                    inputRef={emailRef}
+                    inputType="text"
+                    inputPlaceholder="Username"
+                    inputRef={userNameRef}
                 />
                 <Input
                     inputType="password"
                     inputPlaceholder="New Password"
                     inputRef={passwordRef}
                 />
-                <label htmlFor="remember-me" className={styles['checkbox']}>
+                <label htmlFor="remember-me" className={styles["checkbox"]}>
                     <input type="checkbox" id="remember-me" />
                     <span>Remember Me</span>
                 </label>
@@ -38,6 +77,28 @@ const Login = (props) => {
                     Don't have a account? Register
                 </Link>
             </form>
+            {validationAlert &&
+                createPortal(
+                    <Toast
+                        toastMessage="Please Enter all the fields"
+                        className="failure"
+                    />,
+                    document.getElementById("toast")
+                )}
+            {response && <Navigate to="/" replace={true} />}
+            {error &&
+                createPortal(
+                    <Toast
+                        toastMessage={`${error?.message}`}
+                        className="failure"
+                    />,
+                    document.getElementById("toast")
+                )}
+            {isLoading &&
+                createPortal(
+                    <Toast toastMessage="Loading..." className="info" />,
+                    document.getElementById("toast")
+                )}
         </div>
     );
 };

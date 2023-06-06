@@ -40,7 +40,6 @@ const useApi = () => {
             if (!response.ok) {
                 setError(await response.json());
             } else {
-                console.log("Hello")
                 setResponse(await response.json());
             }
         } catch (err) {
