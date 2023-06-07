@@ -1,0 +1,45 @@
+.mfa-page__wrapper {
+    font-family: var(--secondary-font-family);
+    width: 90%;
+    margin: 20px auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.mfa-enable__wrapper {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    font-size: 14px;
+}
+
+.btn {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
+
+.btn:hover {
+    background-color: var(--white-color);
+    color: var(--green-color);
+}
+
+@media screen and (max-width: 500px) {
+    .mfa-page__wrapper {
+        width: 95%;
+    }
+    .mfa-enable__wrapper {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .btn {
+        width: 100%;
+    }
+}

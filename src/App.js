@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
-import MFA from "./components/forms/MFA";
+import MFA from "./pages/MFA";
 import Navigation from "./components/UI/Navigation";
 import { authActions } from "./redux/auth-slice";
 

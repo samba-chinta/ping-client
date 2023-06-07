@@ -89,7 +89,7 @@ const Login = (props) => {
                     />,
                     document.getElementById("toast")
                 )}
-            {response && <Navigate to="/auth/token" replace={true} />}
+            {response && <Navigate to="/auth/mfa" replace={true} />}
             {error &&
                 createPortal(
                     <Toast

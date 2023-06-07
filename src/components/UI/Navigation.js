@@ -1,9 +1,22 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../redux/auth-slice";
 
 import styles from "../../styles/component-styles/navigation.module.css";
 
 const Navigation = (props) => {
+    const dispatch = useDispatch();
+    const [logout, setLogout] = useState(false);
+
+    const logoutHandler = () => {
+        localStorage.removeItem("username");
+        localStorage.removeItem("token");
+        localStorage.removeItem("isloggedin");
+        dispatch(authActions.logout());
+        setLogout(true);
+    };
+
     return (
         <header className={styles["header"]}>
             <div className={styles["page-navigation__wrapper"]}>
@@ -18,13 +31,15 @@ const Navigation = (props) => {
                         </NavLink>
                     )}
                     {props.isLoggedIn && (
-                        <NavLink
-                            to="/log-out"
-                            className={`${styles["nav-link"]} ${styles["get-started"]}`}
+                        <button
+                            type="button"
+                            className={styles["logout-btn"]}
+                            onClick={logoutHandler}
                         >
                             Logout
-                        </NavLink>
+                        </button>
                     )}
+                    {logout && <Navigate to="/" replace={true} />}
                 </nav>
             </div>
         </header>

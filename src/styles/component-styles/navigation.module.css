@@ -45,3 +45,18 @@
     background-color: var(--white-color);
     color: var(--primary-color)
 }
+
+.logout-btn {
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    font-family: var(--primary-font-family);
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    transform: scale(0.9);
+}

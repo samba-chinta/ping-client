@@ -8,7 +8,7 @@ const Button = (props) => {
     const button_text = props.buttonText;
 
     return (
-        <button className={classes} type={button_type}>
+        <button className={classes} type={button_type} >
             {button_text}
         </button>
     );
