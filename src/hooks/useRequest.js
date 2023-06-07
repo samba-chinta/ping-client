@@ -20,9 +20,14 @@ const useApi = () => {
         const { url } = payload;
         try {
             const responseData = await fetch(url);
-            return responseData.json();
+            if (!responseData.ok) {
+                setError(await responseData.json());
+            } else {
+                const text = await responseData.text();
+                setResponse(text);
+            }
         } catch (err) {
-            return err;
+            setError(err);
         }
     }
 

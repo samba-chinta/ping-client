@@ -47,9 +47,13 @@ const Login = (props) => {
     };
 
     if (response) {
+        localStorage.setItem('token', response.authToken);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('isloggedin', true);
         dispatch(
             authActions.login({
-                token: response.authToken
+                token: response.authToken,
+                username: response.username,
             })
         )
     }
@@ -85,7 +89,7 @@ const Login = (props) => {
                     />,
                     document.getElementById("toast")
                 )}
-            {response && <Navigate to="/" replace={true} />}
+            {response && <Navigate to="/auth/token" replace={true} />}
             {error &&
                 createPortal(
                     <Toast
