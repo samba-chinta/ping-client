@@ -28,8 +28,13 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.qr-wrapper {
+  display: grid;
+  place-items: center ;
+}
+
 .qr-wrapper img {
-  width: 100%;
+  width: 300px;
   height: 100%;
 }
 
@@ -60,6 +65,11 @@
   padding: 10px;
   background-color: var(--primary-color);
   color: #fff;
+  cursor: pointer;
+}
+
+.verify-form__wrapper form [type="submit"]:hover {
+  transform: scale(0.99);
 }
 
 @media screen and (max-width: 700px){

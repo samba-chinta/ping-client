@@ -39,7 +39,7 @@ const Navigation = (props) => {
                             Logout
                         </button>
                     )}
-                    {logout && <Navigate to="/" replace={true} />}
+                    {logout && <Navigate to="/" />}
                 </nav>
             </div>
         </header>

@@ -49,11 +49,13 @@ const Login = (props) => {
     if (response) {
         localStorage.setItem('token', response.authToken);
         localStorage.setItem('username', response.username);
+        localStorage.setItem('isMFAEnabled', response.isMFAEnabled);
         localStorage.setItem('isloggedin', true);
         dispatch(
             authActions.login({
                 token: response.authToken,
                 username: response.username,
+                isMFAEnabled: response.isMFAEnabled,
             })
         )
     }

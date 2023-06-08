@@ -32,7 +32,7 @@ const App = () => {
         <div>
             {userToken && <Navigation isLoggedIn={userToken ? true : false} />}
             <Routes>
-                <Route path="/" element={<Home />} exact />
+                {!userToken && <Route path="/" element={<Home />} exact />}
                 {!userToken && (
                     <Route
                         path="/auth/register"
@@ -43,6 +43,7 @@ const App = () => {
                 {!userToken && (
                     <Route path="/auth/login" element={<LoginPage />} exact />
                 )}
+                {userToken && <Route path="/" element={<h1>Home page</h1>} exact/>}
                 {userToken && (
                     <Route path="/auth/mfa" element={<MFA />} exact />
                 )}
