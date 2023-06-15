@@ -34,7 +34,7 @@ const MFA = (props) => {
             setIsAllFieldEntered(false);
         } else {
             await postDataToApiHandler({
-                url: "http://localhost:5000/auth/verify-mfa",
+                url: "http://localhost:5000/auth/enable-mfa",
                 data: {
                     username: auth.username,
                     token: auth.auth_token,

@@ -13,6 +13,7 @@ const Navigation = (props) => {
         localStorage.removeItem("username");
         localStorage.removeItem("token");
         localStorage.removeItem("isloggedin");
+        localStorage.removeItem("isMFAEnabled");
         dispatch(authActions.logout());
         setLogout(true);
     };

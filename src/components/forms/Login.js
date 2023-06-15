@@ -18,6 +18,7 @@ const Login = (props) => {
     const { response, error, postDataToApiHandler } = useApi();
     const [validationAlert, setValidationAlert] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    let isMFAEnabled = false;
 
     useEffect(() => {
         setTimeout(() => {
@@ -47,15 +48,18 @@ const Login = (props) => {
     };
 
     if (response) {
-        localStorage.setItem('token', response.authToken);
-        localStorage.setItem('username', response.username);
-        localStorage.setItem('isMFAEnabled', response.isMFAEnabled);
+        const auth_token = response.authToken;
+        const username = response.username;
+        isMFAEnabled = response.isMFAEnabled;
+        localStorage.setItem('token', auth_token);
+        localStorage.setItem('username', username);
+        localStorage.setItem('isMFAEnabled', isMFAEnabled);
         localStorage.setItem('isloggedin', true);
         dispatch(
             authActions.login({
-                token: response.authToken,
-                username: response.username,
-                isMFAEnabled: response.isMFAEnabled,
+                token: auth_token,
+                username: username,
+                isMFAEnabled: isMFAEnabled,
             })
         )
     }
@@ -91,7 +95,8 @@ const Login = (props) => {
                     />,
                     document.getElementById("toast")
                 )}
-            {response && <Navigate to="/auth/mfa" replace={true} />}
+            {response && !isMFAEnabled && <Navigate to="/auth/mfa" replace={true} />}
+            {response && isMFAEnabled && <Navigate to="/auth/verify-mfa" replace={true} />}
             {error &&
                 createPortal(
                     <Toast
