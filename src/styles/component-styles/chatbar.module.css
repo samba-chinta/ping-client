@@ -1,0 +1,16 @@
+.chat-bar__wrapper {
+    display: flex;
+    gap: 0 10px;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.chat-contact__name {
+    font-family: var(--territary-font-family);
+    font-size: 18px;
+}
+
+.chat-bar__wrapper:hover {
+    background-color: aliceblue;
+}
