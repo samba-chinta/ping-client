@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import MFA from "./pages/MFA";
 import Navigation from "./components/UI/Navigation";
+import Main from "./pages/Main";
 import VerifyMFAPage from "./pages/VerifyMFAPage";
 import { authActions } from "./redux/auth-slice";
 
@@ -47,7 +48,7 @@ const App = () => {
                 {!userToken && (
                     <Route path="/auth/login" element={<LoginPage />} exact />
                 )}
-                {userToken && <Route path="/" element={<h1>Home page</h1>} exact/>}
+                {userToken && <Route path="/" element={<Main/>} exact/>}
                 {userToken && !isMFAEnabled && (
                     <Route path="/auth/mfa" element={<MFA />} exact />
                 )}
