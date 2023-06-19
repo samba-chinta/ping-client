@@ -35,7 +35,7 @@ const App = () => {
 
     return (
         <div>
-            {userToken && <Navigation isLoggedIn={userToken ? true : false} />}
+            {!userToken && <Navigation isLoggedIn={userToken ? true : false} />}
             <Routes>
                 {!userToken && <Route path="/" element={<Home />} exact />}
                 {!userToken && (
