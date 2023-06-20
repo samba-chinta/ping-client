@@ -13,6 +13,10 @@
     font-weight: 400;
 }
 
-.chat-bar__wrapper:hover {
-    background-color: aliceblue;
+.chat-bar__wrapper:hover, .contact-selected {
+    background-color: var(--white-color);
+}
+
+.chat-bar__wrapper input {
+    display: none;
 }
