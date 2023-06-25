@@ -20,3 +20,11 @@
 .chat-bar__wrapper input {
     display: none;
 }
+
+[type="checkbox"] {
+    display: none;
+}
+
+[type="checkbox"]:checked {
+    background-color: aliceblue;
+}

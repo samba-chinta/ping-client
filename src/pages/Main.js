@@ -4,6 +4,7 @@ import styles from "../styles/page-styles/main.module.css";
 import ChatBar from "../components/chat/ChatBar";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { Link } from "react-router-dom";
+import ChatRoom from "../components/chat/ChatRoom";
 
 const contacts = [
     "Damon",
@@ -31,22 +32,36 @@ const Main = (props) => {
                         <PersonAddAlt1Icon />
                     </Link>
                 </div>
-                <div className={styles["contacts"]}>
+                <form className={styles["contacts"]}>
                     {contacts.map((contact) => {
                         return (
-                            <ChatBar
-                                contactName={contact}
-                                key={Math.random()}
-                                setContactHandler={(contact) => {
-                                    setSelectedContact(contact)
-                                }}
-                            />
+                            <div key={Math.random()}>
+                                <label htmlFor={`${contact}_${contact[0]}`.toLowerCase()}>
+                                    <ChatBar
+                                        contactName={contact}
+                                        setContactHandler={(contact) => {
+                                            setSelectedContact(contact);
+                                        }}
+                                    />
+                                </label>
+                                <input
+                                    type="checkbox"
+                                    name="user-contact"
+                                    id={`${contact}_${contact[0]}`.toLowerCase()}
+                                />
+                            </div>
                         );
                     })}
-                </div>
+                </form>
             </div>
             <div className={styles["chat-room"]}>
-                {selectedContact? <h1>Say Hello to {selectedContact}</h1>: "Chat Room"}
+                <ChatRoom
+                    contactName={
+                        selectedContact
+                            ? selectedContact
+                            : "Click on a contact to start chatting..."
+                    }
+                />
             </div>
         </div>
     );
