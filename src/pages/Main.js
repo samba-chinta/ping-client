@@ -36,7 +36,9 @@ const Main = (props) => {
                     {contacts.map((contact) => {
                         return (
                             <div key={Math.random()}>
-                                <label htmlFor={`${contact}_${contact[0]}`.toLowerCase()}>
+                                <label
+                                    htmlFor={`${contact}_${contact[0]}`.toLowerCase()}
+                                >
                                     <ChatBar
                                         contactName={contact}
                                         setContactHandler={(contact) => {
@@ -54,15 +56,11 @@ const Main = (props) => {
                     })}
                 </form>
             </div>
-            <div className={styles["chat-room"]}>
-                <ChatRoom
-                    contactName={
-                        selectedContact
-                            ? selectedContact
-                            : "Click on a contact to start chatting..."
-                    }
-                />
-            </div>
+            {selectedContact ? (
+                <ChatRoom contactName={selectedContact} />
+            ) : (
+                <div>Select the contact to chat</div>
+            )}
         </div>
     );
 };

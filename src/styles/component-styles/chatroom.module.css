@@ -1,0 +1,26 @@
+.chat-room__wrapper {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 10% 80% 10%;
+}
+
+.chat-room__header {
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: solid 1px var(--alice-blue-color);
+}
+
+.chat-room__header .contact-name {
+    font-family: var(--secondary-font-family);
+    font-weight: bold;
+}
+
+.chat-room__header .header-controls {
+    display: flex;
+    gap: 2rem;
+    cursor: pointer;
+}
