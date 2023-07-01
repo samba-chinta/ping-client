@@ -3,6 +3,7 @@ import React from "react";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import ScreenShareIcon from "@mui/icons-material/ScreenShare";
+import InfoIcon from '@mui/icons-material/Info';
 
 import styles from "../../styles/component-styles/chatroom.module.css";
 
@@ -15,6 +16,7 @@ const ChatRoom = (props) => {
                     <LocalPhoneIcon />
                     <VideocamIcon />
                     <ScreenShareIcon />
+                    <InfoIcon />
                 </div>
             </div>
             <div className={styles["chat-room__messages_body"]}>
