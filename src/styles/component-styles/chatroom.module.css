@@ -24,3 +24,39 @@
     gap: 2rem;
     cursor: pointer;
 }
+
+.chat-room__footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: solid 1px var(--alice-blue-color);
+}
+
+.message-send__form {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    align-items: center;
+    gap: 5px;
+}
+
+.message-send__form input[type="text"] {
+    padding: 10px;
+    border: solid 1px #000;
+    font-family: var(--primary-font-family);
+}
+
+.message-send__form [type="submit"] {
+    outline: none;
+    border: none;
+    padding: 5px;
+    color: var(--alice-blue-color);
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.message-send__form [type="submit"]:hover {
+    background-color: var(--alice-blue-color);
+    color: var(--secondary-color);
+}

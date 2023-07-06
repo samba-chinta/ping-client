@@ -1,5 +1,6 @@
 import React from "react";
 
+import SendIcon from '@mui/icons-material/Send';
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import ScreenShareIcon from "@mui/icons-material/ScreenShare";
@@ -22,7 +23,14 @@ const ChatRoom = (props) => {
             <div className={styles["chat-room__messages_body"]}>
                 <h2>Messages</h2>
             </div>
-            <div className={styles["chat-room__footer"]}>Messages form</div>
+            <div className={styles["chat-room__footer"]}>
+                <form className={styles['message-send__form']}>
+                    <input type="text" placeholder="Enter Message" />
+                    <button type="submit">
+                        <SendIcon/>
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };
