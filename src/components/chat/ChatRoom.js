@@ -27,7 +27,7 @@ const ChatRoom = (props) => {
                 <form className={styles['message-send__form']}>
                     <input type="text" placeholder="Enter Message" />
                     <button type="submit">
-                        <SendIcon/>
+                        Send <SendIcon/>
                     </button>
                 </form>
             </div>
